@@ -45,7 +45,7 @@ class AgentState(TypedDict):
     user_id: Optional[str]
 
     # TODO: Modify actions_taken to use an operator.add reducer
-    actions_taken: Annotated[List[str]]
+    actions_taken: Annotated[List[str], operator.add]
 
 
 def invoke_react_agent(response_schema: type[BaseModel], messages: List[BaseMessage], llm, tools) -> (
