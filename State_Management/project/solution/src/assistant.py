@@ -118,11 +118,12 @@ class DocumentAssistant:
 
         #TODO: Complete the config dictionary to set the thread_ud, llm, and tools to the workflow
         # Refer to README.md Task 2.6 for details
+
         config = {
             "configurable": {
-                "thread_id": self.current_session.get("session_id", None) # TODO: Set this to the session id of the current sessions
-                "llm": self.llm # TODO Set this to the LLM instance (self.llm)
-                "tools": self.tools # TODO Set this to the list of tools
+                "thread_id": self.current_session.session_id, # TODO: Set this to the session id of the current sessions
+                "llm": self.llm, # TODO Set this to the LLM instance (self.llm)
+                "tools": self.tools, # TODO Set this to the list of tools
             }
         }
 
@@ -157,6 +158,7 @@ class DocumentAssistant:
                         final_state["active_documents"]
                     ))
                 self._save_session()
+                
             return {
                 "success": True,
                 "response": final_state.get("messages")[-1].content if final_state.get("messages") else None,

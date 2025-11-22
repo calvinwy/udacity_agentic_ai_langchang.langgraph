@@ -1,0 +1,308 @@
+{
+  "session_id": "e04934fd-7128-4f4d-878d-ebb7a2363078",
+  "user_id": "demo_user",
+  "conversation_history": [
+    {
+      "user_input": "What's the total amount in invoice INV-001?",
+      "messages": [
+        {
+          "content": "You are an expert data analysis specializing in financial and healthcare documents.\n\nYour approach:\n- Extract key numercial information from the document related to the user's question\n- Provide reasoning for the mathematical expression\n- Use available tools to search and read documents\n\nGuidelines:\n1. Always search for relevant documents before answering\n2. Determine the mathematical expression required to calculate based on the user's input\n3. Double check the mathematical expression is valid to answer the user's question, if not, go back to step 2.\n4. Use the calculator tool for all calculations no matter how simple\n5. Return only the mathematical expression\n\n",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "system",
+          "name": null,
+          "id": "56e0b016-5637-49fd-b8a9-4d54b02cc88f"
+        },
+        {
+          "content": "What's the total amount in invoice INV-001?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "55a194ee-5535-43c1-a9b1-d2b958119a3e"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 17,
+              "prompt_tokens": 754,
+              "total_tokens": 771,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-2024-08-06",
+            "system_fingerprint": "fp_c98e05ca17",
+            "id": "chatcmpl-CekIaF1eyl7xVZ1S2cnnSW9PTVyTR",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--4bc8d2f7-c8a8-4b75-91bf-0ce0a7de24bd-0",
+          "tool_calls": [
+            {
+              "name": "document_reader",
+              "args": {
+                "doc_id": "INV-001"
+              },
+              "id": "call_RLYMSZGPnSwfM2BlYasr9l00",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 754,
+            "output_tokens": 17,
+            "total_tokens": 771,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "Document INV-001:\n\n\n                Invoice #12345\n                Date: 2024-01-15\n                Client: Acme Corporation\n\n                Services Rendered:\n                - Consulting Services: $5,000\n                - Software Development: $12,500\n                - Support & Maintenance: $2,500\n\n                Subtotal: $20,000\n                Tax (10%): $2,000\n\n                Payment Terms: Net 30 days\n                ",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "document_reader",
+          "id": "92350268-e6a3-4082-9942-813b54354bbd",
+          "tool_call_id": "call_RLYMSZGPnSwfM2BlYasr9l00",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "To find the total amount in invoice INV-001, we need to add the subtotal and the tax.\n\nThe subtotal is $20,000 and the tax is $2,000.\n\nThe mathematical expression for the total amount is:\n\n\\( 20000 + 2000 \\)",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 57,
+              "prompt_tokens": 874,
+              "total_tokens": 931,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-2024-08-06",
+            "system_fingerprint": "fp_c98e05ca17",
+            "id": "chatcmpl-CekIcWczwAaTLyAKfK1mKSchM7KyL",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--b349ac4d-e065-45fa-ac07-7092162a9f30-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 874,
+            "output_tokens": 57,
+            "total_tokens": 931,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ],
+      "intent": "calculation",
+      "next_step": "end",
+      "conversation_summary": "The user asked for the total amount in invoice INV-001. The invoice includes services such as consulting, software development, and support, with a subtotal of $20,000 and a tax of $2,000. The total amount is calculated by adding the subtotal and tax, resulting in $22,000.",
+      "active_documents": [
+        "INV-001"
+      ],
+      "current_response": {
+        "messages": [
+          {
+            "content": "You are an expert data analysis specializing in financial and healthcare documents.\n\nYour approach:\n- Extract key numercial information from the document related to the user's question\n- Provide reasoning for the mathematical expression\n- Use available tools to search and read documents\n\nGuidelines:\n1. Always search for relevant documents before answering\n2. Determine the mathematical expression required to calculate based on the user's input\n3. Double check the mathematical expression is valid to answer the user's question, if not, go back to step 2.\n4. Use the calculator tool for all calculations no matter how simple\n5. Return only the mathematical expression\n\n",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "system",
+            "name": null,
+            "id": "56e0b016-5637-49fd-b8a9-4d54b02cc88f"
+          },
+          {
+            "content": "What's the total amount in invoice INV-001?",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": null,
+            "id": "55a194ee-5535-43c1-a9b1-d2b958119a3e"
+          },
+          {
+            "content": "",
+            "additional_kwargs": {
+              "refusal": null
+            },
+            "response_metadata": {
+              "token_usage": {
+                "completion_tokens": 17,
+                "prompt_tokens": 754,
+                "total_tokens": 771,
+                "completion_tokens_details": {
+                  "accepted_prediction_tokens": 0,
+                  "audio_tokens": 0,
+                  "reasoning_tokens": 0,
+                  "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                  "audio_tokens": 0,
+                  "cached_tokens": 0
+                }
+              },
+              "model_provider": "openai",
+              "model_name": "gpt-4o-2024-08-06",
+              "system_fingerprint": "fp_c98e05ca17",
+              "id": "chatcmpl-CekIaF1eyl7xVZ1S2cnnSW9PTVyTR",
+              "service_tier": "default",
+              "finish_reason": "tool_calls",
+              "logprobs": null
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--4bc8d2f7-c8a8-4b75-91bf-0ce0a7de24bd-0",
+            "tool_calls": [
+              {
+                "name": "document_reader",
+                "args": {
+                  "doc_id": "INV-001"
+                },
+                "id": "call_RLYMSZGPnSwfM2BlYasr9l00",
+                "type": "tool_call"
+              }
+            ],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 754,
+              "output_tokens": 17,
+              "total_tokens": 771,
+              "input_token_details": {
+                "audio": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          },
+          {
+            "content": "Document INV-001:\n\n\n                Invoice #12345\n                Date: 2024-01-15\n                Client: Acme Corporation\n\n                Services Rendered:\n                - Consulting Services: $5,000\n                - Software Development: $12,500\n                - Support & Maintenance: $2,500\n\n                Subtotal: $20,000\n                Tax (10%): $2,000\n\n                Payment Terms: Net 30 days\n                ",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "document_reader",
+            "id": "92350268-e6a3-4082-9942-813b54354bbd",
+            "tool_call_id": "call_RLYMSZGPnSwfM2BlYasr9l00",
+            "artifact": null,
+            "status": "success"
+          },
+          {
+            "content": "To find the total amount in invoice INV-001, we need to add the subtotal and the tax.\n\nThe subtotal is $20,000 and the tax is $2,000.\n\nThe mathematical expression for the total amount is:\n\n\\( 20000 + 2000 \\)",
+            "additional_kwargs": {
+              "refusal": null
+            },
+            "response_metadata": {
+              "token_usage": {
+                "completion_tokens": 57,
+                "prompt_tokens": 874,
+                "total_tokens": 931,
+                "completion_tokens_details": {
+                  "accepted_prediction_tokens": 0,
+                  "audio_tokens": 0,
+                  "reasoning_tokens": 0,
+                  "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                  "audio_tokens": 0,
+                  "cached_tokens": 0
+                }
+              },
+              "model_provider": "openai",
+              "model_name": "gpt-4o-2024-08-06",
+              "system_fingerprint": "fp_c98e05ca17",
+              "id": "chatcmpl-CekIcWczwAaTLyAKfK1mKSchM7KyL",
+              "service_tier": "default",
+              "finish_reason": "stop",
+              "logprobs": null
+            },
+            "type": "ai",
+            "name": null,
+            "id": "lc_run--b349ac4d-e065-45fa-ac07-7092162a9f30-0",
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": {
+              "input_tokens": 874,
+              "output_tokens": 57,
+              "total_tokens": 931,
+              "input_token_details": {
+                "audio": 0,
+                "cache_read": 0
+              },
+              "output_token_details": {
+                "audio": 0,
+                "reasoning": 0
+              }
+            }
+          }
+        ],
+        "structured_response": {
+          "question": "What's the total amount in invoice INV-001?",
+          "answer": "20000 + 2000",
+          "sources": [
+            "INV-001"
+          ],
+          "confidence": 1.0,
+          "timestamp": "2023-10-06T12:00:00+00:00"
+        }
+      },
+      "tools_used": [
+        "document_reader"
+      ],
+      "session_id": "e04934fd-7128-4f4d-878d-ebb7a2363078",
+      "user_id": "demo_user",
+      "actions_taken": [
+        "classify_intent",
+        "calculation_agent"
+      ]
+    }
+  ],
+  "document_context": [
+    "INV-001"
+  ],
+  "created_at": "2025-11-22T16:58:37.912917",
+  "last_updated": "2025-11-22T16:58:55.138536"
+}

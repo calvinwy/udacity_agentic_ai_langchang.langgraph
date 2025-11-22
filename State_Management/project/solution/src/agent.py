@@ -77,16 +77,15 @@ def classify_intent(state: AgentState, config: RunnableConfig) -> AgentState:
 
     llm = config.get("configurable").get("llm")
     user_input = state.get("user_input", "")
-    history = state.get("messages", [])
+    history = state.get("messages", None)
 
     # TODO Configure the llm chat model for structured output
     llm_with_structure = llm.with_structured_output(UserIntent)
 
     # TODO Create a formatted prompt with conversation history and user input
-    intent_prompt_template = get_intent_classification_prompt()
-    intent_prompt_template.format(user_input=user_input, conversation_history=history)
+    intent_prompt_template = get_intent_classification_prompt().format(user_input=user_input, conversation_history=history)
     response = llm_with_structure.invoke(intent_prompt_template)
-    intent = response.get("intent_type", "qa")
+    intent = response.intent_type
 
     # TODO: Add conditional logic to set next_step based on intent
     if intent == "qa":
@@ -101,8 +100,8 @@ def classify_intent(state: AgentState, config: RunnableConfig) -> AgentState:
     return {
         "actions_taken": ["classify_intent"],
         # TODO: Update state intent and next_step
-        "intent" = intent,
-        "next_step" = next_step
+        "intent": intent,
+        "next_step": next_step
     }
 
 
@@ -207,53 +206,53 @@ def update_memory(state: AgentState, config: RunnableConfig) -> AgentState:
 
     response = structured_llm.invoke(prompt_with_history)
     return {
-        "conversation_summary": response["summary"], # TODO: Extract summary from response
-        "active_documents": response["document_ids"], # TODO: Update with the current active documents
+        "conversation_summary": response.summary, # TODO: Extract summary from response
+        "active_documents": response.document_ids, # TODO: Update with the current active documents
         "next_step": "end", # TODO: Update the next step to end
     }
 
-    def should_continue(state: AgentState) -> str:
-        """Router function"""
-        return state.get("next_step", "end")
+def should_continue(state: AgentState) -> str:
+    """Router function"""
+    return state.get("next_step", "end")
 
-    # TODO: Complete the create_workflow function. Refer to README.md Task 2.5
-    def create_workflow(llm, tools):
-        """
-        Creates the LangGraph agents.
-        Compiles the workflow with an InMemorySaver checkpointer to persist state.
-        """
-        workflow = StateGraph(AgentState)
+# TODO: Complete the create_workflow function. Refer to README.md Task 2.5
+def create_workflow(llm, tools):
+    """
+    Creates the LangGraph agents.
+    Compiles the workflow with an InMemorySaver checkpointer to persist state.
+    """
+    workflow = StateGraph(AgentState)
 
-        # TODO: Add all the nodes to the workflow by calling workflow.add_node(...)
-        workflow.add_node("classify_intent", classify_intent)
-        workflow.add_node("qa_agent", qa_agent)
-        workflow.add_node("summarization_agent", summarization_agent)
-        workflow.add_node("calculation_agent", calculation_agent)
-        workflow.add_node("update_memory", update_memory)
+    # TODO: Add all the nodes to the workflow by calling workflow.add_node(...)
+    workflow.add_node("classify_intent", classify_intent)
+    workflow.add_node("qa_agent", qa_agent)
+    workflow.add_node("summarization_agent", summarization_agent)
+    workflow.add_node("calculation_agent", calculation_agent)
+    workflow.add_node("update_memory", update_memory)
 
-        workflow.set_entry_point("classify_intent")
-        workflow.add_conditional_edges(
-            source="classify_intent",
-            path=should_continue,
-            path_map={
-                # TODO: Map the intent strings to the correct node names
-                "qa_agent": "qa_agent",
-                "summarization_agent": "summarization_agent",
-                "calculation_agent": "calculation_agent"
-                "end": END
-            }
-        )
+    workflow.set_entry_point("classify_intent")
+    workflow.add_conditional_edges(
+        source="classify_intent",
+        path=should_continue,
+        path_map={
+            # TODO: Map the intent strings to the correct node names
+            "qa_agent": "qa_agent",
+            "summarization_agent": "summarization_agent",
+            "calculation_agent": "calculation_agent",
+            # "end": END
+        }
+    )
 
-        # TODO: For each node add an edge that connects it to the update_memory node
-        # qa_agent -> update_memory
-        # summarization_agent -> update_memory
-        # calculation_agent -> update_memory
-        workflow.add_edge("qu_agent", "update_memory")
-        workflow.add_edge("summarization_agent", "update_memory")
-        workflow.add_edge("calculation_agent", "update_memory")
-        workflow.add_edge("update_memory", END)
+    # TODO: For each node add an edge that connects it to the update_memory node
+    # qa_agent -> update_memory
+    # summarization_agent -> update_memory
+    # calculation_agent -> update_memory
+    workflow.add_edge("qa_agent", "update_memory")
+    workflow.add_edge("summarization_agent", "update_memory")
+    workflow.add_edge("calculation_agent", "update_memory")
+    workflow.add_edge("update_memory", END)
 
-        # TODO Modify the return values below by adding a checkpointer with InMemorySaver
-        memory = InMemorySaver()
+    # TODO Modify the return values below by adding a checkpointer with InMemorySaver
+    memory = InMemorySaver()
 
-        return workflow.compile(checkpointer=memory)
+    return workflow.compile(checkpointer=memory)

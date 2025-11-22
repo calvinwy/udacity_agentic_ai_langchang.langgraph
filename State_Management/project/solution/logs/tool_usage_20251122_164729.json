@@ -1,0 +1,18 @@
+[
+  {
+    "timestamp": "2025-11-22T16:47:41.889266",
+    "tool_name": "document_reader",
+    "input": {
+      "doc_id": "INV-001"
+    },
+    "output": "{'found': True, 'doc_type': 'invoice'}"
+  },
+  {
+    "timestamp": "2025-11-22T16:47:43.528909",
+    "tool_name": "calculator",
+    "input": {
+      "expr": "20000 + 2000"
+    },
+    "output": "{'valid': True, 'result': '22000', 'error': None}"
+  }
+]

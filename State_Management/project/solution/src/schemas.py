@@ -1,6 +1,6 @@
 from langchain_core.messages import BaseMessage
 from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any, Literal, TypedDict
+from typing import List, Optional, Dict, Any, Literal, TypedDict, Annotated
 from datetime import datetime
 
 

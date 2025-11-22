@@ -65,7 +65,7 @@ def create_calculator_tool(logger: ToolLogger):
     """
     Creates a calculator tool
     """
-    
+
     # Your implementation here
     @tool
     def calculator(expr: str) -> str:
@@ -83,17 +83,20 @@ def create_calculator_tool(logger: ToolLogger):
             result: A string containing the output of the numerical expression in str format
         """
         # Use regular expression to only allow simple operator and parentheses
-        pattern = re.compile(r'^(?P<expr>\s*(?:[+-]?(?:\d+(?:\.\d+)?|\(\s*(?P>expr)\s*\)))\s*(?:[+\-*/]\s*(?:[+-]?(?:\d+(?:\.\d+)?|\(\s*(?P>expr)\s*\)))\s*)*)$')
-        valid = pattern.fullmatch(expr)
-        if bool(valid):
+        pattern = re.compile(r'^\s*([+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?|\(|\)|[+\-*/])(\s*([+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?|\(|\)|[+\-*/]))*\s*$')
+        valid_expr = bool(pattern.fullmatch(expr))
+        if valid_expr:
             result = str(eval(expr))
             # Log the tool use
             logger.log_tool_use(
                 "calculator",
                 {
-                    "expression": expr,
+                    "expr": expr,
+                },
+                {
                     "valid": True,
-                    "result": result
+                    "result": result,
+                    "error": None,
                 },
             )
             return result
@@ -104,13 +107,16 @@ def create_calculator_tool(logger: ToolLogger):
             logger.log_tool_use(
                 "calculator",
                 {
-                    "expression": expr,
+                    "expr": expr,
+                },
+                {
                     "valid": False,
-                    "result": None
-                    "error": error_msg
+                    "result": None,
+                    "error": error_msg,
                 },
             )
-            return str(None)
+            return None
+    return calculator
 
 def create_document_search_tool(retriever, logger: ToolLogger):
     """
