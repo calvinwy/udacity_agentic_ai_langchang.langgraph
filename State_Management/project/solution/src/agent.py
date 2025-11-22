@@ -84,15 +84,14 @@ def classify_intent(state: AgentState, config: RunnableConfig) -> AgentState:
 
     # TODO Create a formatted prompt with conversation history and user input
     intent_prompt_template = get_intent_classification_prompt().format(user_input=user_input, conversation_history=history)
-    response = llm_with_structure.invoke(intent_prompt_template)
-    intent = response.intent_type
-
+    intent = llm_with_structure.invoke(intent_prompt_template)
+    
     # TODO: Add conditional logic to set next_step based on intent
-    if intent == "qa":
+    if intent.intent_type == "qa":
         next_step = "qa_agent"
-    elif intent == "summarization":
+    elif intent.intent_type == "summarization":
         next_step = "summarization_agent"
-    elif intent == "calculation":
+    elif intent.intent_type == "calculation":
         next_step = "calculation_agent"
     else:
         next_step = "qa_agent"

@@ -162,7 +162,9 @@ class DocumentAssistant:
             return {
                 "success": True,
                 "response": final_state.get("messages")[-1].content if final_state.get("messages") else None,
+                # ====== The .dict() here is to convert the Pydantic data structure into Dictionary ======
                 "intent": final_state.get("intent").dict() if final_state.get("intent") else None,
+                # ========================================================================================
                 "tools_used": final_state.get("tools_used", []),
                 "sources": final_state.get("active_documents", []),
                 "actions_taken": final_state.get("actions_taken", []),
