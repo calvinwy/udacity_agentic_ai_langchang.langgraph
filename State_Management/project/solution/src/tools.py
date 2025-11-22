@@ -10,7 +10,6 @@ import re
 import json
 from datetime import datetime
 
-
 class ToolLogger:
     """Logs tool usage with automatic persistence"""
 
@@ -64,11 +63,54 @@ class ToolLogger:
 # Refer to README.md Task 4.1 for detailed implementation requirements.
 def create_calculator_tool(logger: ToolLogger):
     """
-    Creates a calculator tool - TO BE IMPLEMENTED
+    Creates a calculator tool
     """
+    
     # Your implementation here
-    pass
+    @tool
+    def calculator(expr: str) -> str:
+        """
+        Performs safe mathematical calculation.
 
+        Args:
+            expr: A simple mathematical expression only using +,-,*,/,(,) and float number as input
+        
+        Examples:
+            - "1+2" → result="3.0"
+            - "(3+2)*4 → result="20.0"
+            - "10/5+3" → result="5.0"
+        Returns:
+            result: A string containing the output of the numerical expression in str format
+        """
+        # Use regular expression to only allow simple operator and parentheses
+        pattern = re.compile(r'^(?P<expr>\s*(?:[+-]?(?:\d+(?:\.\d+)?|\(\s*(?P>expr)\s*\)))\s*(?:[+\-*/]\s*(?:[+-]?(?:\d+(?:\.\d+)?|\(\s*(?P>expr)\s*\)))\s*)*)$')
+        valid = pattern.fullmatch(expr)
+        if bool(valid):
+            result = str(eval(expr))
+            # Log the tool use
+            logger.log_tool_use(
+                "calculator",
+                {
+                    "expression": expr,
+                    "valid": True,
+                    "result": result
+                },
+            )
+            return result
+        else:
+            error_msg = "Mathematical expression is not value (complex operator or unsafe)."
+            ValueError(error_msg)
+            # Log the tool use
+            logger.log_tool_use(
+                "calculator",
+                {
+                    "expression": expr,
+                    "valid": False,
+                    "result": None
+                    "error": error_msg
+                },
+            )
+            return str(None)
 
 def create_document_search_tool(retriever, logger: ToolLogger):
     """

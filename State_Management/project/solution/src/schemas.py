@@ -16,9 +16,12 @@ class DocumentChunk(BaseModel):
 # This schema should include fields for the question, answer, sources, confidence, and timestamp.
 # Refer to README.md Task 1.1 for detailed field requirements.
 class AnswerResponse(BaseModel):
-    """Structured response for Q&A tasks - TO BE IMPLEMENTED"""
-    pass
-
+    """Structured response for Q&A tasks - Pydantic model to ensure consistent formatting of answers and tracks which documents were referenced"""
+    question: Annotated[str, Field(description="The original user question")]
+    answer: Annotated[str, Field(description="The generated answer")]
+    sources: Annotated[List[str], Field(description="List of source document IDs used")]
+    confidence: Annotated[float, Field(default=None, ge=0.0, le=1.0, description="Confidence score between 0 and 1")]
+    timestamp: Annotated[datetime, Field(description="When the response was generated")]
 
 
 class SummarizationResponse(BaseModel):
@@ -49,9 +52,10 @@ class UpdateMemoryResponse(BaseModel):
 # This schema should include fields for intent_type, confidence, and reasoning.
 # Refer to README.md Task 1.2 for detailed field requirements.
 class UserIntent(BaseModel):
-    """User intent classification - TO BE IMPLEMENTED"""
-    pass
-
+    """User intent classification - This schema helps the system understand what type of request the user is making and route it to the appropriate agent."""
+    intent_type: Annotated[Literal['qa', 'summarization', 'calculation', 'unknown'], Field(description="The classified intent")]
+    confidence: Annotated[float, Field(default=None, ge=0.0, le=1.0, description="Confidence in classification")]
+    reasoning: Annotated[str, Field(description="Explanation for the classification")]
 
 class SessionState(BaseModel):
     """Session state"""

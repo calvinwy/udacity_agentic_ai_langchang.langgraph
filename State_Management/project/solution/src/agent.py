@@ -76,19 +76,33 @@ def classify_intent(state: AgentState, config: RunnableConfig) -> AgentState:
     """
 
     llm = config.get("configurable").get("llm")
+    user_input = state.get("user_input", "")
     history = state.get("messages", [])
 
     # TODO Configure the llm chat model for structured output
+    llm_with_structure = llm.with_structured_output(UserIntent)
 
     # TODO Create a formatted prompt with conversation history and user input
-
-    next_step = "qa"
+    intent_prompt_template = get_intent_classification_prompt()
+    intent_prompt_template.format(user_input=user_input, conversation_history=history)
+    response = llm_with_structure.invoke(intent_prompt_template)
+    intent = response.get("intent_type", "qa")
 
     # TODO: Add conditional logic to set next_step based on intent
+    if intent == "qa":
+        next_step = "qa_agent"
+    elif intent == "summarization":
+        next_step = "summarization_agent"
+    elif intent == "calculation":
+        next_step = "calculation_agent"
+    else:
+        next_step = "qa_agent"
 
     return {
         "actions_taken": ["classify_intent"],
         # TODO: Update state intent and next_step
+        "intent" = intent,
+        "next_step" = next_step
     }
 
 
