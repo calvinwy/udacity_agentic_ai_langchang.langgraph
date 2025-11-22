@@ -1,0 +1,123 @@
+(python_3.13.0_udacity) calvin@Calvins-MacBook-Pro solution % python main.py
+
+============================================================
+DocDacity Intelligent Document Assistant
+============================================================
+
+ INITIALIZING ASSISTANT...
+Enter your user ID (or press Enter for 'demo_user'): 
+Started new session 0a5c04fb-ddb7-4953-b385-1bb7fa2076c8
+Session started: 0a5c04fb-ddb7-4953-b385-1bb7fa2076c8
+
+AVAILABLE COMMANDS:
+  /help     - Show this help message
+  /docs     - List available documents
+  /quit     - Exit the assistant
+
+Example queries:
+  - What's the total amount in invoice INV-001?
+  - Summarize all contracts
+  - Calculate the sum of all invoice totals
+  - Find documents with amounts over $50,000
+
+
+Enter Message: What's the total amount in invoice INV-001?
+
+Processing...
+
+🤖 Assistant: To find the total amount in invoice INV-001, we need to add the subtotal and the tax.
+
+The subtotal is $20,000 and the tax is $2,000.
+
+The mathematical expression for the total amount is:
+
+```
+20000 + 2000
+```
+
+INTENT: calculation
+
+TOOLS USED: document_reader
+
+CONVERSATION SUMMARY: The user inquired about the total amount in invoice INV-001. The invoice details include services rendered such as consulting services ($5,000), software development ($12,500), and support & maintenance ($2,500), leading to a subtotal of $20,000. A tax of 10% ($2,000) is applied, making the total amount $22,000.
+
+Enter Message: Summarize all contracts
+
+Processing...
+
+🤖 Assistant: ### Summary of Contract Document (ID: CON-001)
+
+**Title:** Service Agreement  
+**Date:** January 1, 2024  
+**Parties Involved:**  
+- **Provider:** DocDacity Solutions Inc.  
+- **Client:** Healthcare Partners LLC  
+
+**Services Provided:**  
+1. Document Processing Platform Access  
+2. 24/7 Technical Support  
+3. Monthly Data Analytics Reports  
+4. Compliance Monitoring  
+
+**Financial Details:**  
+- **Monthly Fee:** $15,000  
+- **Total Contract Value:** $180,000  
+
+**Duration:** 12 months  
+
+**Termination Clause:** Either party may terminate the agreement with 60 days written notice.  
+
+This contract outlines the services provided by DocDacity Solutions Inc. to Healthcare Partners LLC, including technical support and data analytics, for a total value of $180,000 over a year.
+
+INTENT: summarization
+
+TOOLS USED: document_reader, document_search, document_reader
+
+CONVERSATION SUMMARY: The conversation involved a query about the total amount in invoice INV-001, which was found to be $22,000, including a subtotal of $20,000 and a tax of $2,000. Additionally, a summary of a service agreement contract (ID: CON-001) was provided, detailing a 12-month agreement between DocDacity Solutions Inc. and Healthcare Partners LLC for services like document processing and technical support, with a total contract value of $180,000.
+
+Enter Message: Calculate the sum of all invoice totals
+
+Processing...
+
+🤖 Assistant: To calculate the sum of all invoice totals, we need to add the total amounts from each invoice:
+
+- **Invoice INV-001 Total:** $22,000
+- **Invoice INV-002 Total:** $69,300
+- **Invoice INV-003 Total:** $214,500
+
+The mathematical expression for the sum of all invoice totals is:
+
+```
+22000 + 69300 + 214500
+```
+
+INTENT: calculation
+
+TOOLS USED: document_reader, document_search, document_reader, document_search, document_reader, document_reader
+
+CONVERSATION SUMMARY: The user requested the total amounts from invoices INV-001, INV-002, and INV-003. The invoices contain the following totals:
+
+- **Invoice INV-001 Total:** $22,000
+- **Invoice INV-002 Total:** $69,300
+- **Invoice INV-003 Total:** $214,500
+
+The sum of all invoice totals is calculated by adding these amounts together.
+
+Enter Message: Find documents with amounts over $50,000
+
+Processing...
+
+🤖 Assistant: The document with an amount over $50,000 is:
+
+- **Document ID:** INV-002
+  - **Title:** Invoice #12346
+  - **Type:** Invoice
+  - **Amount:** $69,300.00
+  - **Date:** February 20, 2024
+  - **Client:** TechStart Inc.
+
+INTENT: calculation
+
+TOOLS USED: document_reader, document_search, document_reader, document_search, document_reader, document_reader, document_search
+
+CONVERSATION SUMMARY: The conversation involved calculating the total amount in invoice INV-001, which was found to be $22,000. Additionally, the user requested a summary of all contracts, leading to the review of contract CON-001, a service agreement between DocDacity Solutions Inc. and Healthcare Partners LLC, valued at $180,000 over 12 months. The user also asked for the sum of all invoice totals, which included invoices INV-001 ($22,000), INV-002 ($69,300), and INV-003 ($214,500), resulting in a total of $305,800. Finally, the user inquired about documents with amounts over $50,000, identifying INV-002 as such a document.
