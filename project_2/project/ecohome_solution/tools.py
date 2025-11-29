@@ -488,5 +488,5 @@ TOOL_KIT = [
     query_solar_generation,
     get_recent_energy_summary,
     search_energy_tips,
-    calculate_energy_savings
+    calculate_energy_savings,
 ]

@@ -14,6 +14,7 @@ llm_base_url = "https://openai.vocareum.com/v1"
 class Agent:
 
     def __init__(self, instructions:str, model:str="gpt-4o-mini"):
+    # def __init__(self, instructions:str, model:str="gpt-4o"):
 
         # Initialize the LLM
         llm = ChatOpenAI(
