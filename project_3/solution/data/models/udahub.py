@@ -6,7 +6,9 @@ from sqlalchemy import (
     DateTime,
     Enum,
     ForeignKey,
-    UniqueConstraint
+    UniqueConstraint,
+    Float,
+    CheckConstraint,
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -76,6 +78,7 @@ class TicketMetadata(Base):
     status = Column(String, nullable=False)
     main_issue_type = Column(String)
     tags = Column(Text)
+    urgency_score = Column(Float, default=0.0)
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
 
@@ -83,7 +86,19 @@ class TicketMetadata(Base):
 
     def __repr__(self):
         return f"<TicketMetadata(ticket_id='{self.ticket_id}', status='{self.status}', issue_type='{self.main_issue_type}')>"
-
+    
+    # Define the CheckConstraint for the range (e.g., between 0 and 100)
+    __table_args__ = (
+        # The constraint is written as a standard SQL expression
+        CheckConstraint(
+            urgency_score >= 0.0, 
+            name='score_must_be_non_negative'
+        ),
+        CheckConstraint(
+            urgency_score <= 1.0, 
+            name='inventory_must_be_under_1.0'
+        )
+    )
 
 class RoleEnum(enum.Enum):
     user = "user"
