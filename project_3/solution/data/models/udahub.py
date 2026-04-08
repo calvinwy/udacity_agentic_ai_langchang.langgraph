@@ -2,6 +2,7 @@ import enum
 from sqlalchemy import (
     Column,
     String,
+    Boolean,
     Text,
     DateTime,
     Enum,
@@ -40,6 +41,11 @@ class User(Base):
     account_id = Column(String, ForeignKey('accounts.account_id'), nullable=False)
     external_user_id = Column(String, nullable=False)
     user_name = Column(String, nullable=False)
+
+    # Calvin added for additional agentic functionalities
+    is_blocked = Column(Boolean, default=False)
+    email_address = Column(String, nullable=True)
+
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
 
