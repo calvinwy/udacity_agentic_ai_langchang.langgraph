@@ -49,7 +49,7 @@ def get_highest_urgency_ticket() -> HighestUrgencyTicket:
         result = conn.execute(query).mappings().first()
         
         if not result:
-            return HighestUrgencyTicket({})
+            result = HighestUrgencyTicket({})
         else:
             result = dict(result)
             result["user_id"] = result.pop("owner_id")
@@ -60,7 +60,8 @@ def get_highest_urgency_ticket() -> HighestUrgencyTicket:
             result["ticket_channel"] = result.pop("channel")
             result["ticket_urgency"] = result.pop("urgency_score")
             result = HighestUrgencyTicket(result)
-            return result
+        
+        return result
 
 @mcp.tool()
 def delete_ticket(ticket_id: str) -> str:

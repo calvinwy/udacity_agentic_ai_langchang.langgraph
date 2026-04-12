@@ -1,8 +1,15 @@
 import os
-from typing import List, Dict, Any
+from typing import List, Dict, Any, TypedDict
 from mcp.server.fastmcp import FastMCP
 from sqlalchemy import create_engine, text
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+
+class UserDetails(TypedDict, total=False):     # `total=False`: None of these keys are strictly required
+    user_name: str
+    user_status: str
+    user_tier: str
+    user_is_blocked: str
+    user_email: str
 
 # --- Configuration ---
 CULTPASS_DB_PATH = os.getenv("CULTPASS_DB_PATH", "data/external/cultpass.db")
@@ -28,18 +35,17 @@ def get_user_subscription_details(user_id: str) -> Dict[str, Any]:
         result = conn.execute(sql, {"user_id": user_id}).mappings().first()
         
         if not result:
-            result = {"messages": [AIMessage(content="User not found")]}
-            return result
-            # return {"error": "User or subscription not found."}
+            result = UserDetails({})
         else:
             result = dict(result)
-            result["messages"] = AIMessage(content="User information successful retrieved")
             result["user_name"] = result.pop("full_name")
             result["user_status"] = result.pop("status")
             result["user_tier"] = result.pop("tier")
             result["user_is_blocked"] = bool(result.pop("is_blocked"))
             result["user_email"] = result.pop("email")
-            return result
+            result = UserDetails(result)
+        
+        return result
 
 @mcp.tool()
 def get_user_reservation_history(user_id: str) -> List[Dict[str, Any]]:
