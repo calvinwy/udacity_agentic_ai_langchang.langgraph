@@ -3,6 +3,18 @@ from typing import Any, Dict, Optional
 from mcp.server.fastmcp import FastMCP
 from sqlalchemy import create_engine, text
 
+from typing import TypedDict
+from mcp.types import CallToolResult
+
+class HighestUrgencyTicket(TypedDict, total=False):     # `total=False`: None of these keys are strictly required
+    ticket_id: str
+    user_id: str
+    account_id: str
+    ticket_content: str
+    ticket_tag: str
+    ticket_channel: str
+    ticket_urgency: float
+
 # --- Configuration ---
 UDAHUB_DB_PATH = os.getenv("UDAHUB_DB_PATH", "data/core/udahub.db")
 DB_URL = f"sqlite:///{UDAHUB_DB_PATH}"
@@ -12,7 +24,7 @@ engine = create_engine(DB_URL)
 mcp = FastMCP("Udahub Ticket Manager")
 
 @mcp.tool()
-def get_highest_urgency_ticket() -> Optional[Dict[str, Any]]:
+def get_highest_urgency_ticket() -> HighestUrgencyTicket:
     """
     Fetches the ticket with the highest urgency score using raw SQL.
     """
@@ -37,38 +49,39 @@ def get_highest_urgency_ticket() -> Optional[Dict[str, Any]]:
         result = conn.execute(query).mappings().first()
         
         if not result:
-            return {}
-            # return {"error": "User or subscription not found."}
+            return HighestUrgencyTicket({})
         else:
             result = dict(result)
             result["user_id"] = result.pop("owner_id")
             result["account_id"] = result.pop("account_id")
+            result["ticket_id"] = result.pop("ticket_id")
             result["ticket_content"] = result.pop("content")
-            result["ticket_tag"] = bool(result.pop("tags"))
+            result["ticket_tag"] = result.pop("tags")
             result["ticket_channel"] = result.pop("channel")
             result["ticket_urgency"] = result.pop("urgency_score")
+            result = HighestUrgencyTicket(result)
             return result
 
-# @mcp.tool()
-# def delete_ticket(ticket_id: str) -> str:
-#     """
-#     Removes a ticket and its associated child records using raw SQL.
-#     """
-#     # Since SQLite might not have PRAGMA foreign_keys = ON by default,
-#     # we manually delete from child tables to be safe.
-#     queries = [
-#         text("DELETE FROM ticket_messages WHERE ticket_id = :tid"),
-#         text("DELETE FROM ticket_metadata WHERE ticket_id = :tid"),
-#         text("DELETE FROM tickets WHERE ticket_id = :tid")
-#     ]
+@mcp.tool()
+def delete_ticket(ticket_id: str) -> str:
+    """
+    Removes a ticket and its associated child records using raw SQL.
+    """
+    # Since SQLite might not have PRAGMA foreign_keys = ON by default,
+    # we manually delete from child tables to be safe.
+    queries = [
+        text("DELETE FROM ticket_messages WHERE ticket_id = :tid"),
+        text("DELETE FROM ticket_metadata WHERE ticket_id = :tid"),
+        text("DELETE FROM tickets WHERE ticket_id = :tid")
+    ]
 
-#     try:
-#         with engine.begin() as conn:
-#             for q in queries:
-#                 conn.execute(q, {"tid": ticket_id})
-#         return f"Success: Ticket {ticket_id} and associated data deleted."
-#     except Exception as e:
-#         return f"Error: {str(e)}"
+    try:
+        with engine.begin() as conn:
+            for q in queries:
+                conn.execute(q, {"tid": ticket_id})
+        return f"Success: Ticket {ticket_id} and associated data deleted."
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 if __name__ == "__main__":
     mcp.run()
