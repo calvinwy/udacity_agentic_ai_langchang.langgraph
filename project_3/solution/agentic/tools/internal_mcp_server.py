@@ -84,8 +84,5 @@ def web_search(query: str, search_depth: Literal['basic', 'advanced']='basic') -
     }    
     return formatted_results
 
-
-
-
 if __name__ == "__main__":
     mcp.run()
