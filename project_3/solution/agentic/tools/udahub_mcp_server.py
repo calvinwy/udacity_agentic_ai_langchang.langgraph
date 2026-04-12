@@ -37,7 +37,7 @@ def get_highest_urgency_ticket() -> Optional[Dict[str, Any]]:
         result = conn.execute(query).mappings().first()
         
         if not result:
-            return None
+            return {}
             # return {"error": "User or subscription not found."}
         else:
             result = dict(result)
@@ -49,26 +49,26 @@ def get_highest_urgency_ticket() -> Optional[Dict[str, Any]]:
             result["ticket_urgency"] = result.pop("urgency_score")
             return result
 
-@mcp.tool()
-def delete_ticket(ticket_id: str) -> str:
-    """
-    Removes a ticket and its associated child records using raw SQL.
-    """
-    # Since SQLite might not have PRAGMA foreign_keys = ON by default,
-    # we manually delete from child tables to be safe.
-    queries = [
-        text("DELETE FROM ticket_messages WHERE ticket_id = :tid"),
-        text("DELETE FROM ticket_metadata WHERE ticket_id = :tid"),
-        text("DELETE FROM tickets WHERE ticket_id = :tid")
-    ]
+# @mcp.tool()
+# def delete_ticket(ticket_id: str) -> str:
+#     """
+#     Removes a ticket and its associated child records using raw SQL.
+#     """
+#     # Since SQLite might not have PRAGMA foreign_keys = ON by default,
+#     # we manually delete from child tables to be safe.
+#     queries = [
+#         text("DELETE FROM ticket_messages WHERE ticket_id = :tid"),
+#         text("DELETE FROM ticket_metadata WHERE ticket_id = :tid"),
+#         text("DELETE FROM tickets WHERE ticket_id = :tid")
+#     ]
 
-    try:
-        with engine.begin() as conn:
-            for q in queries:
-                conn.execute(q, {"tid": ticket_id})
-        return f"Success: Ticket {ticket_id} and associated data deleted."
-    except Exception as e:
-        return f"Error: {str(e)}"
+#     try:
+#         with engine.begin() as conn:
+#             for q in queries:
+#                 conn.execute(q, {"tid": ticket_id})
+#         return f"Success: Ticket {ticket_id} and associated data deleted."
+#     except Exception as e:
+#         return f"Error: {str(e)}"
 
 if __name__ == "__main__":
     mcp.run()

@@ -1,10 +1,11 @@
 import os
+import datetime
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 from langchain_community.vectorstores import Chroma
-from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_openai import OpenAIEmbeddings
 from tavily import TavilyClient
+from typing import Literal
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")    # For ChormaDB embeddings
@@ -51,7 +52,7 @@ def article_rag_search(query: str, n_results: int = 3) -> str:
 
 # 3. Define the Web Search Tool
 @mcp.tool()
-def web_search(query: str) -> dict:
+def web_search(query: str, search_depth: Literal['basic', 'advanced']='basic') -> dict:
     """
     Search the web using Tavily API
     args:
@@ -77,17 +78,14 @@ def web_search(query: str) -> dict:
             for r in search_result.get("results", [])
         ],
         "metadata": {
-            "timestamp": datetime.now().isoformat(),
+            "timestamp": datetime.datetime.now().isoformat(),
             "query": query
         }
-    }
-    
+    }    
     return formatted_results
+
+
 
 
 if __name__ == "__main__":
     mcp.run()
-
-
-
-    client = TavilyClient(api_key=TAVILY_API_KEY)
