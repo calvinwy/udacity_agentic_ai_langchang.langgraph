@@ -6,14 +6,32 @@ from sqlalchemy import create_engine, text
 from typing import TypedDict
 from mcp.types import CallToolResult
 
-class HighestUrgencyTicket(TypedDict, total=False):     # `total=False`: None of these keys are strictly required
-    ticket_id: str
+from typing import Annotated, Optional, Literal, List, Dict, TypedDict
+from pydantic import BaseModel
+from fastmcp.exceptions import ToolError
+
+# class HighestUrgencyTicket(TypedDict, total=False):     # `total=False`: None of these keys are strictly required
+#     ticket_id: str
+#     user_id: str
+#     account_id: str
+#     ticket_content: str
+#     ticket_tag: str
+#     ticket_channel: str
+#     ticket_urgency: float
+
+class TicketInfo(BaseModel):
     user_id: str
     account_id: str
-    ticket_content: str
-    ticket_tag: str
-    ticket_channel: str
+    ticket_id: str
+    ticket_content: str | None = None
+    ticket_channel: str | None = None
+    ticket_tag: str | None = None
     ticket_urgency: float
+
+class HighestUrgencyTicketResult(BaseModel):
+    status: Literal["ok", "not_found"]
+    ticket: TicketInfo | None = None
+    message: str | None = None
 
 # --- Configuration ---
 UDAHUB_DB_PATH = os.getenv("UDAHUB_DB_PATH", "data/core/udahub.db")
@@ -24,7 +42,7 @@ engine = create_engine(DB_URL)
 mcp = FastMCP("Udahub Ticket Manager")
 
 @mcp.tool()
-def get_highest_urgency_ticket() -> HighestUrgencyTicket:
+def get_highest_urgency_ticket() -> HighestUrgencyTicketResult:
     """
     Fetches the ticket with the highest urgency score using raw SQL.
     """
@@ -45,23 +63,28 @@ def get_highest_urgency_ticket() -> HighestUrgencyTicket:
         LIMIT 1
     """)
 
-    with engine.connect() as conn:
-        result = conn.execute(query).mappings().first()
-        
-        if not result:
-            result = HighestUrgencyTicket({})
-        else:
-            result = dict(result)
-            result["user_id"] = result.pop("owner_id")
-            result["account_id"] = result.pop("account_id")
-            result["ticket_id"] = result.pop("ticket_id")
-            result["ticket_content"] = result.pop("content")
-            result["ticket_tag"] = result.pop("tags")
-            result["ticket_channel"] = result.pop("channel")
-            result["ticket_urgency"] = result.pop("urgency_score")
-            result = HighestUrgencyTicket(result)
-        
-        return result
+    try:
+        with engine.connect() as conn:
+            row = conn.execute(query).mappings().first()
+        if row is None:
+            return HighestUrgencyTicketResult(
+                status="not_found",
+                message="No tickets found",
+            )
+        return HighestUrgencyTicketResult(
+            status="ok",
+            ticket=TicketInfo(
+                ticket_id=row["ticket_id"],
+                ticket_content=row["content"],
+                user_id=row["owner_id"],
+                ticket_channel=row["channel"],
+                ticket_tag=row["tags"],
+                account_id=row["account_id"],
+                ticket_urgency=row["urgency_score"],
+            ),
+        )
+    except Exception as e:
+        raise ToolError(f"Failed to fetch highest urgency ticket: {e}")
 
 @mcp.tool()
 def delete_ticket(ticket_id: str) -> str:
@@ -82,7 +105,7 @@ def delete_ticket(ticket_id: str) -> str:
                 conn.execute(q, {"tid": ticket_id})
         return f"Success: Ticket {ticket_id} and associated data deleted."
     except Exception as e:
-        return f"Error: {str(e)}"
+        raise ToolError(f"Error: {str(e)}")
 
 if __name__ == "__main__":
     mcp.run()
