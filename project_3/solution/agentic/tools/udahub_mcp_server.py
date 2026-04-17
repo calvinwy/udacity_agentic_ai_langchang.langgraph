@@ -54,11 +54,13 @@ def get_highest_urgency_ticket() -> HighestUrgencyTicketResult:
             t.channel, 
             tmd.tags, 
             t.account_id, 
-            tmd.urgency_score
+            tmd.urgency_score,
+            tmd.status,
         FROM tickets t
         JOIN ticket_metadata tmd ON t.ticket_id = tmd.ticket_id
         JOIN users u ON t.user_id = u.user_id
         JOIN ticket_messages tm ON t.ticket_id = tm.ticket_id
+        WHERE tmd.status = 'Open'
         ORDER BY tmd.urgency_score DESC
         LIMIT 1
     """)
@@ -81,6 +83,7 @@ def get_highest_urgency_ticket() -> HighestUrgencyTicketResult:
                 ticket_tag=row["tags"],
                 account_id=row["account_id"],
                 ticket_urgency=row["urgency_score"],
+                ticket_status=row["status"],
             ),
         )
     except Exception as e:
@@ -106,6 +109,36 @@ def delete_ticket(ticket_id: str) -> str:
         return f"Success: Ticket {ticket_id} and associated data deleted."
     except Exception as e:
         raise ToolError(f"Error: {str(e)}")
+
+@mcp.tool()
+def update_ticket_status(ticket_id: str, new_status: str) -> str:
+    """
+    Updates the status of a ticket using raw SQL.
+    
+    Args:
+        ticket_id: The ID of the ticket to update.
+        new_status: The new status string.
+    """
+    # SQL query to update the metadata table
+    # We use :variable syntax to prevent SQL injection
+    sql_query = text("""
+        UPDATE ticket_metadata 
+        SET status = :status, 
+            updated_at = CURRENT_TIMESTAMP
+        WHERE ticket_id = :tid
+    """)
+
+    try:
+        with engine.begin() as conn:
+            result = conn.execute(sql_query, {"status": new_status, "tid": ticket_id})
+            
+            if result.rowcount == 0:
+                return f"No ticket found with ID: {ticket_id}"
+            
+            return f"Successfully updated ticket {ticket_id} to status: {new_status}"
+            
+    except Exception as e:
+        return f"Database error: {str(e)}"
 
 if __name__ == "__main__":
     mcp.run()
