@@ -35,6 +35,7 @@ class HighestUrgencyTicketResult(BaseModel):
     message: str | None = None
 
 # --- Configuration ---
+# UDAHUB_DB_PATH = os.path.join(os.getcwd(), os.getenv("UDAHUB_DB_PATH", "data/core/udahub.db"))
 UDAHUB_DB_PATH = os.getenv("UDAHUB_DB_PATH", "data/core/udahub.db")
 DB_URL = f"sqlite:///{UDAHUB_DB_PATH}"
 engine = create_engine(DB_URL)

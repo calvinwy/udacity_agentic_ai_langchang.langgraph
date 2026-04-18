@@ -1,13 +1,11 @@
 import os
 import json
-from typing import Annotated, Optional, List, Literal
-from pydantic import BaseModel, Field, EmailStr
 from dotenv import load_dotenv
 
 # LangChain & MCP Imports
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain.agents import create_agent
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_openai import ChatOpenAI
 from langchain_tavily import TavilySearch
 from langgraph.graph.message import add_messages
 
@@ -38,9 +36,30 @@ llm_small = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.0, base_url=llm_base
 llm_medium = ChatOpenAI(model="gpt-4o-mini", temperature=0.0, base_url=llm_base_url, api_key=OPENAI_API_KEY)
 llm_large = ChatOpenAI(model="gpt-4o", temperature=0.0, base_url=llm_base_url, api_key=OPENAI_API_KEY)
 
-# ========================
-# === Helper Functions ===
-# ========================
+# ============================
+# === MCP Helper Functions ===
+# ============================
+server_configs = {
+    "udahub": {
+        "transport": "stdio",
+        "command": "python",
+        "args": ["agentic/tools/udahub_mcp_server.py"],
+        "env": {**os.environ, "DATABASE_PATH": os.getenv("UDAHUB_DB_PATH")}
+    },
+    "cultpass": {
+        "transport": "stdio",
+        "command": "python",
+        "args": ["agentic/tools/cultpass_mcp_server.py"],
+        "env": {**os.environ}
+    },
+    "internal": {
+        "transport": "stdio",
+        "command": "python",
+        "args": ["agentic/tools/internal_mcp_server.py"],
+        "env": {**os.environ}
+    }
+}
+mcp_client = MultiServerMCPClient(server_configs)
 
 async def call_tool(tool_list: list, tool_name: str, query: dict = {}):
     my_tool = next((tool for tool in tool_list if tool.name == tool_name), None)
@@ -52,63 +71,54 @@ async def call_tool(tool_list: list, tool_name: str, query: dict = {}):
     except:
         return {"status": "ok", "response": raw_text}
 
-# ============================
-# === Async Initialization ===
-# ============================
-
-async def initialize_agents(num_customer_inquiry_agents=1, num_account_access_agents=1, num_general_inquiry_agents=1):
-    # --- MCP Config ---
-    server_configs = {
-        "udahub": {
-            "transport": "stdio",
-            "command": "python",
-            "args": ["agentic/tools/udahub_mcp_server.py"],
-            "env": {**os.environ, "DATABASE_PATH": os.getenv("UDAHUB_DB_PATH")}
-        },
-        "cultpass": {
-            "transport": "stdio",
-            "command": "python",
-            "args": ["agentic/tools/cultpass_mcp_server.py"],
-            "env": {**os.environ}
-        },
-        "internal": {
-            "transport": "stdio",
-            "command": "python",
-            "args": ["agentic/tools/internal_mcp_server.py"],
-            "env": {**os.environ}
-        }
-    }
-
-    mcp_client = MultiServerMCPClient(server_configs)
-    
+async def initialize_mcp_client():
+    '''
+    Initialize MCP Connection
+    '''
     # Initialize tools
-    cultpass_tools = await mcp_client.get_tools(server_name="cultpass")
-    internal_tools = await mcp_client.get_tools(server_name="internal")
-    tavily_tool = TavilySearch(max_results=3, api_key=os.getenv("TAVILY_API_KEY"))
+    # cultpass_tools = await mcp_client.get_tools(server_name="cultpass")
+    # internal_tools = await mcp_client.get_tools(server_name="internal")
+    # tavily_tool = TavilySearch(max_results=3, api_key=os.getenv("TAVILY_API_KEY"))
 
     # All Tools
     all_tools = await mcp_client.get_tools()
     all_tools = all_tools + [TavilySearch(max_results=3, api_key=TAVILY_API_KEY)]
 
+    return {
+        "all_tools": all_tools,
+        "mcp_client": mcp_client,
+    }
+
+# ============================
+# === Agent Initialization ===
+# ============================
+
+# --- Agent 1: Task Orchestrator ---
+task_orchestrator_prompt = """
+You are an expert in sorting customer inquiries and forwarding to the coresponding team, please determine the team based on the following criteria:
+(1) Customer Inquiry Team: If the ticket is related to account cancellation, subscription change, or account reactivation, forward the ticket to the Customer Inquiry Team.
+(2) Account Access Team: If the ticket is related to login issues, password reset, or account lockout, billing questions, forward the ticket to the Account Access Team.
+(3) General Inquiry Team: For any other matters that do not fit the above categories, forward the ticket to the General Inquiry Team.
+Output the team name only without any explanation.
+"""
+task_orchestrator_agent = create_agent(
+    name="task_orchestrator_agent",
+    system_prompt=task_orchestrator_prompt,
+    model=llm_small,
+    response_format=OrchestratorSelection,
+)
+
+async def initialize_processing_agents(num_customer_inquiry_agents=1, num_account_access_agents=1, num_general_inquiry_agents=1):
+    '''
+    Wrapping Function Required due to Async of MCP Tools
+    '''
+    tools_and_client = await initialize_mcp_client()
+    all_tools = tools_and_client['all_tools']
+
     # Tool Mapping
     account_access_team_tools = [tool for tool in all_tools if tool.name in account_access_team_tools_name ]
     customer_inquiry_team_tools = [tool for tool in all_tools if tool.name in customer_inquiry_team_tools_name ]
     general_inquiry_team_tools = [tool for tool in all_tools if tool.name in general_inquiry_team_tools_name ]
-
-    # --- Agent 1: Task Orchestrator ---
-    task_orchestrator_prompt = """
-    You are an expert in sorting customer inquiries and forwarding to the coresponding team, please determine the team based on the following criteria:
-    (1) Customer Inquiry Team: If the ticket is related to account cancellation, subscription change, or account reactivation, forward the ticket to the Customer Inquiry Team.
-    (2) Account Access Team: If the ticket is related to login issues, password reset, or account lockout, billing questions, forward the ticket to the Account Access Team.
-    (3) General Inquiry Team: For any other matters that do not fit the above categories, forward the ticket to the General Inquiry Team.
-    Output the team name only without any explanation.
-    """
-    task_orchestrator_agent = create_agent(
-        name="task_orchestrator_agent",
-        system_prompt=task_orchestrator_prompt,
-        model=llm_small,
-        response_format=OrchestratorSelection,
-    )
 
     # --- Agent 2: Customer Inquiry Pool ---
     customer_inquiry_team_prompt = """
@@ -166,11 +176,8 @@ async def initialize_agents(num_customer_inquiry_agents=1, num_account_access_ag
     )
 
     return {
-        "orchestrator": task_orchestrator_agent,
         "customer_inquiry_agents_pool": customer_inquiry_agents_pool,
         "account_access_agents_pool": account_access_agent_pool,
         "general_inquiry_agent_pool": general_inquiry_agent_pool,
         "evaluator": confidence_eval_agent,
-        "all_tools": all_tools,
-        "mcp_client": mcp_client,
     }
