@@ -27,6 +27,7 @@ class TicketInfo(BaseModel):
     ticket_channel: str | None = None
     ticket_tag: str | None = None
     ticket_urgency: float
+    ticket_status: str | None = None
 
 class HighestUrgencyTicketResult(BaseModel):
     status: Literal["ok", "not_found"]
@@ -55,12 +56,12 @@ def get_highest_urgency_ticket() -> HighestUrgencyTicketResult:
             tmd.tags, 
             t.account_id, 
             tmd.urgency_score,
-            tmd.status,
+            tmd.status
         FROM tickets t
         JOIN ticket_metadata tmd ON t.ticket_id = tmd.ticket_id
         JOIN users u ON t.user_id = u.user_id
         JOIN ticket_messages tm ON t.ticket_id = tm.ticket_id
-        WHERE tmd.status = 'Open'
+        WHERE tmd.status = 'open'
         ORDER BY tmd.urgency_score DESC
         LIMIT 1
     """)
@@ -87,7 +88,8 @@ def get_highest_urgency_ticket() -> HighestUrgencyTicketResult:
             ),
         )
     except Exception as e:
-        raise ToolError(f"Failed to fetch highest urgency ticket: {e}")
+        raise SystemError(f"Failed to fetch highest urgency ticket: {e}")
+
 
 @mcp.tool()
 def delete_ticket(ticket_id: str) -> str:
