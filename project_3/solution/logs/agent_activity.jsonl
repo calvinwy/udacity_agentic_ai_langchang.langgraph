@@ -1,0 +1,140 @@
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Process group termination failed for PID 28696: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 28964: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29019: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29026: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29033: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29037: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29102: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29112: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29119: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29122: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29228: [Errno 1] Operation not permitted, falling back to simple terminate
+Process group termination failed for PID 29271: [Errno 1] Operation not permitted, falling back to simple terminate
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T01:56:58.647540", "event": "routing_decision", "ticket_id": "f65dda97-ef51-4b31-8e86-152c4f6c32c7", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T01:59:12.810214", "event": "routing_decision", "ticket_id": "f65dda97-ef51-4b31-8e86-152c4f6c32c7", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:15:07.839312", "event": "routing_decision", "ticket_id": "f65dda97-ef51-4b31-8e86-152c4f6c32c7", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:16:01.714209", "event": "routing_decision", "ticket_id": "f65dda97-ef51-4b31-8e86-152c4f6c32c7", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:20:01.118648", "event": "routing_decision", "ticket_id": "f65dda97-ef51-4b31-8e86-152c4f6c32c7", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:31:22.259609", "event": "routing_decision", "ticket_id": "f65dda97-ef51-4b31-8e86-152c4f6c32c7", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+{"timestamp": "2026-04-19T02:31:22.263148", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:31:30.946365", "event": "confidence_score", "ticket_id": "f65dda97-ef51-4b31-8e86-152c4f6c32c7", "score": 1.0, "next": "__end__"}
+{"timestamp": "2026-04-19T02:31:31.992510", "event": "routing_decision", "ticket_id": "f65dda97-ef51-4b31-8e86-152c4f6c32c7", "team": null, "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:31:50.435457", "event": "routing_decision", "ticket_id": "ec456385-1868-4d17-9696-37d91a7b1704", "team": "account_access_team", "ticket_content_preview": "Hi, I forgot my password and can't reset it. Can you help me regain access to my"}
+{"timestamp": "2026-04-19T02:31:50.440469", "event": "team_invoked", "team": "account_access_team", "agent_index": 0}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:31:53.605141", "event": "routing_decision", "ticket_id": "ec456385-1868-4d17-9696-37d91a7b1704", "team": null, "ticket_content_preview": "Hi, I forgot my password and can't reset it. Can you help me regain access to my"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:31:55.980288", "event": "routing_decision", "ticket_id": "d6dc9534-5ce6-42a3-993c-42d49d3aaae6", "team": "general_inquiry_team", "ticket_content_preview": "Hello, I'm interested in learning more about the benefits package offered by you"}
+{"timestamp": "2026-04-19T02:31:55.985824", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:32:03.448633", "event": "confidence_score", "ticket_id": "d6dc9534-5ce6-42a3-993c-42d49d3aaae6", "score": 1.0, "next": "__end__"}
+{"timestamp": "2026-04-19T02:32:04.464121", "event": "routing_decision", "ticket_id": "d6dc9534-5ce6-42a3-993c-42d49d3aaae6", "team": null, "ticket_content_preview": "Hello, I'm interested in learning more about the benefits package offered by you"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:32:22.548476", "event": "routing_decision", "ticket_id": "6d7e0ff7-cd3b-4f7f-9e2e-cf659e58a541", "team": "account_access_team", "ticket_content_preview": "Hi, I have some questions about my billing statement. It seems like there are so"}
+{"timestamp": "2026-04-19T02:32:22.554294", "event": "team_invoked", "team": "account_access_team", "agent_index": 0}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:32:26.195502", "event": "routing_decision", "ticket_id": "6d7e0ff7-cd3b-4f7f-9e2e-cf659e58a541", "team": null, "ticket_content_preview": "Hi, I have some questions about my billing statement. It seems like there are so"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:32:28.897988", "event": "routing_decision", "ticket_id": "7c08b1c1-a861-4f44-88ef-d5755d56476f", "team": "account_access_team", "ticket_content_preview": "Hi, I'm having trouble accessing my account. Every time I try to log in, it says"}
+{"timestamp": "2026-04-19T02:32:28.905056", "event": "team_invoked", "team": "account_access_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:32:32.422006", "event": "routing_decision", "ticket_id": "7c08b1c1-a861-4f44-88ef-d5755d56476f", "team": null, "ticket_content_preview": "Hi, I'm having trouble accessing my account. Every time I try to log in, it says"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:32:35.310963", "event": "routing_decision", "ticket_id": "8fde2885-4410-411a-8cf3-0f770d0da2e0", "team": "general_inquiry_team", "ticket_content_preview": "Hello, I'm interested in booking a meeting room for next week, but I'm having tr"}
+{"timestamp": "2026-04-19T02:32:35.315647", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 2}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:32:39.114525", "event": "confidence_score", "ticket_id": "8fde2885-4410-411a-8cf3-0f770d0da2e0", "score": 0.8, "next": "__end__"}
+{"timestamp": "2026-04-19T02:32:40.105988", "event": "routing_decision", "ticket_id": "8fde2885-4410-411a-8cf3-0f770d0da2e0", "team": null, "ticket_content_preview": "Hello, I'm interested in booking a meeting room for next week, but I'm having tr"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:32:43.070528", "event": "routing_decision", "ticket_id": "844e890c-05b1-41a6-8d9b-38e9bd3ee2ad", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I'm interested in learning more about the benefits package offered by your c"}
+{"timestamp": "2026-04-19T02:32:43.078264", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 0}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:32:50.208169", "event": "confidence_score", "ticket_id": "844e890c-05b1-41a6-8d9b-38e9bd3ee2ad", "score": 0.8, "next": "__end__"}
+{"timestamp": "2026-04-19T02:32:51.212980", "event": "routing_decision", "ticket_id": "844e890c-05b1-41a6-8d9b-38e9bd3ee2ad", "team": null, "ticket_content_preview": "Hi, I'm interested in learning more about the benefits package offered by your c"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:17.781087", "event": "routing_decision", "ticket_id": "b32dbb63-94e9-4389-825f-4c3a52e99772", "team": "account_access_team", "ticket_content_preview": "Hello, I need to book a meeting room for next week, but I'm having trouble with "}
+{"timestamp": "2026-04-19T02:33:17.783246", "event": "team_invoked", "team": "account_access_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:20.472202", "event": "routing_decision", "ticket_id": "b32dbb63-94e9-4389-825f-4c3a52e99772", "team": null, "ticket_content_preview": "Hello, I need to book a meeting room for next week, but I'm having trouble with "}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:23.008582", "event": "routing_decision", "ticket_id": "0c5d52b7-3816-4c1c-bc21-f0d9c3f04798", "team": "account_access_team", "ticket_content_preview": "Hello, I'm having trouble with my billing statement. It seems like there are som"}
+{"timestamp": "2026-04-19T02:33:23.012620", "event": "team_invoked", "team": "account_access_team", "agent_index": 0}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:25.979965", "event": "routing_decision", "ticket_id": "0c5d52b7-3816-4c1c-bc21-f0d9c3f04798", "team": null, "ticket_content_preview": "Hello, I'm having trouble with my billing statement. It seems like there are som"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:28.789725", "event": "routing_decision", "ticket_id": "043952d6-66f3-4b42-804e-e2ed95700e8f", "team": "account_access_team", "ticket_content_preview": "Hi, I've been trying to log in to my account to check my billing details, but it"}
+{"timestamp": "2026-04-19T02:33:28.794841", "event": "team_invoked", "team": "account_access_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:31.917216", "event": "routing_decision", "ticket_id": "043952d6-66f3-4b42-804e-e2ed95700e8f", "team": null, "ticket_content_preview": "Hi, I've been trying to log in to my account to check my billing details, but it"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:34.366075", "event": "routing_decision", "ticket_id": "c88d65b7-183c-460a-8ac4-9984b57ec43e", "team": "account_access_team", "ticket_content_preview": "Hello, I'm having trouble with my password and can't log in to my account. Can y"}
+{"timestamp": "2026-04-19T02:33:34.369510", "event": "team_invoked", "team": "account_access_team", "agent_index": 0}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:36.973382", "event": "routing_decision", "ticket_id": "c88d65b7-183c-460a-8ac4-9984b57ec43e", "team": null, "ticket_content_preview": "Hello, I'm having trouble with my password and can't log in to my account. Can y"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:39.594534", "event": "routing_decision", "ticket_id": "baa370de-7eb7-4ca7-8d8a-05468c5be0d4", "team": "customer_inquiry_team", "ticket_content_preview": "Hello, I need to cancel my subscription, but I'm having trouble with the system."}
+{"timestamp": "2026-04-19T02:33:39.600003", "event": "team_invoked", "team": "customer_inquiry_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:42.773303", "event": "routing_decision", "ticket_id": "baa370de-7eb7-4ca7-8d8a-05468c5be0d4", "team": null, "ticket_content_preview": "Hello, I need to cancel my subscription, but I'm having trouble with the system."}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:33:58.480072", "event": "routing_decision", "ticket_id": "4176a8d7-eba5-41de-bd2d-496d06270efb", "team": "account_access_team", "ticket_content_preview": "Hello, I'm having trouble with my billing statement. It seems like there are som"}
+{"timestamp": "2026-04-19T02:33:58.484653", "event": "team_invoked", "team": "account_access_team", "agent_index": 0}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:01.001688", "event": "routing_decision", "ticket_id": "4176a8d7-eba5-41de-bd2d-496d06270efb", "team": null, "ticket_content_preview": "Hello, I'm having trouble with my billing statement. It seems like there are som"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:06.915594", "event": "routing_decision", "ticket_id": "4e72d3ad-2217-40ca-b871-f6eb29111a27", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+{"timestamp": "2026-04-19T02:34:06.918915", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:09.517882", "event": "confidence_score", "ticket_id": "4e72d3ad-2217-40ca-b871-f6eb29111a27", "score": 0.7, "next": "human_escalation"}
+{"timestamp": "2026-04-19T02:34:10.538369", "event": "routing_decision", "ticket_id": "4e72d3ad-2217-40ca-b871-f6eb29111a27", "team": null, "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:14.524153", "event": "routing_decision", "ticket_id": "f3c1a1dc-1d32-4753-a0c8-2e59bee50a02", "team": "account_access_team", "ticket_content_preview": "Hello, I'm having trouble with my password and can't log in to my account. Can y"}
+{"timestamp": "2026-04-19T02:34:14.530720", "event": "team_invoked", "team": "account_access_team", "agent_index": 0}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:18.575539", "event": "routing_decision", "ticket_id": "f3c1a1dc-1d32-4753-a0c8-2e59bee50a02", "team": null, "ticket_content_preview": "Hello, I'm having trouble with my password and can't log in to my account. Can y"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:21.520125", "event": "routing_decision", "ticket_id": "d1e63cac-ea52-4ab2-b94a-d4aa33b37eb4", "team": "customer_inquiry_team", "ticket_content_preview": "Hi, I need to cancel a reservation I made for an event next month. Also, I'm hav"}
+{"timestamp": "2026-04-19T02:34:21.526987", "event": "team_invoked", "team": "customer_inquiry_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:24.981208", "event": "routing_decision", "ticket_id": "d1e63cac-ea52-4ab2-b94a-d4aa33b37eb4", "team": null, "ticket_content_preview": "Hi, I need to cancel a reservation I made for an event next month. Also, I'm hav"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:39.920679", "event": "routing_decision", "ticket_id": "19f63dbc-42a8-44cc-a6ff-84206ddfdda2", "team": "account_access_team", "ticket_content_preview": "Hi, I'm having trouble with my password and can't log in to my account. Also, I "}
+{"timestamp": "2026-04-19T02:34:39.927151", "event": "team_invoked", "team": "account_access_team", "agent_index": 0}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:42.933281", "event": "routing_decision", "ticket_id": "19f63dbc-42a8-44cc-a6ff-84206ddfdda2", "team": null, "ticket_content_preview": "Hi, I'm having trouble with my password and can't log in to my account. Also, I "}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:45.322553", "event": "routing_decision", "ticket_id": "c2f08594-6065-40a9-af28-790c904e69b9", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+{"timestamp": "2026-04-19T02:34:45.328936", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:34:48.005390", "event": "confidence_score", "ticket_id": "c2f08594-6065-40a9-af28-790c904e69b9", "score": 0.5, "next": "human_escalation"}
+{"timestamp": "2026-04-19T02:34:49.031117", "event": "routing_decision", "ticket_id": "c2f08594-6065-40a9-af28-790c904e69b9", "team": null, "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}

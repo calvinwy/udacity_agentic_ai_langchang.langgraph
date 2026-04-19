@@ -1,7 +1,6 @@
 import os
 import asyncio
 import sqlite3
-from langgraph.checkpoint.sqlite import SqliteSaver
 
 from agentic.state_model import *
 from agentic.agents.agents import *
@@ -45,23 +44,6 @@ escalation_threshold = 0.7
 #     }
 # }
 # mcp_client = MultiServerMCPClient(server_configs)
-
-# =========================
-# === Memory Management ===
-# =========================
-
-# Volitile Memory
-# store = InMemoryStore(
-#     index={
-#         "dims": 1536,
-#         "embed": "openai:text-embedding-3-small",
-#     }
-# )
-# Persistent Memory
-db_path = "./data/core/runtime_memory.db"
-conn = sqlite3.connect(db_path, check_same_thread=False)
-memory = SqliteSaver(conn)
-store = memory
 
 # =========================
 # === Chatbot Interface ===

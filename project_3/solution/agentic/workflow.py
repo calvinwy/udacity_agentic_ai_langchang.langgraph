@@ -1,7 +1,6 @@
 import json
+import sqlite3
 
-from dotenv import load_dotenv
-from utils import chat_interface
 from typing import Annotated, Optional, Literal, List, Dict, TypedDict
 
 from langchain_mcp_adapters.client import MultiServerMCPClient
@@ -12,6 +11,7 @@ from langchain_core.runnables import RunnableConfig
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.store.memory import InMemoryStore
 from langgraph.graph import START, END, StateGraph
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.types import Command
@@ -19,6 +19,14 @@ from langgraph.types import Command
 from agentic.state_model import *
 from agentic.agents.agents import *
 
+# =========================
+# === Memory Management ===
+# =========================
+
+db_path = "./data/core/runtime_memory.db"
+conn = sqlite3.connect(db_path, check_same_thread=False)
+checkpointer = SqliteSaver(conn)
+store = InMemoryStore()
 
 # ================================
 # === Round-Robin Teams Graphs ===
@@ -169,7 +177,7 @@ async def create_teams_graphs(num_customer_inquiry_agents, num_account_access_ag
         modify_workflow.add_edge(agent.name, "confident_evaluator")
 
     agent_teams_workflow[team] = modify_workflow
-    agent_teams = { key: value.compile(name=key, checkpointer=MemorySaver()) for key, value in agent_teams_workflow.items() }
+    agent_teams = { key: value.compile(name=key, checkpointer=checkpointer, store=store) for key, value in agent_teams_workflow.items() }
 
     return {
         'agent_swarm_map': agent_swarm_map,
@@ -212,6 +220,12 @@ async def create_main_graph(config: dict):
             out_message = "User not found."
         else:
             out_message = f"User details retrieved successfully: \n{json.dumps(user_detail)}"
+
+        # Retrieving chat history
+        history = await call_tool(all_tools, "get_user_ticket_history", {"external_user_id": ticket.user_id})
+        if history:
+            history_str = "\n".join([f"- [{h['status']}] {h['message'][:100]}" for h in history])
+            out_message += f"\n\nPrevious interaction history:\n{history_str}"
 
         print(out_message)
         output = {
@@ -292,8 +306,7 @@ async def create_main_graph(config: dict):
     workflow.add_edge("user_detail", "task_orchestrator")
     workflow.add_edge("trigger_agent_team", "task_orchestrator")
 
-    checkpointer = MemorySaver()
-    ticket_processing_graph = workflow.compile(checkpointer=checkpointer)
+    ticket_processing_graph = workflow.compile(checkpointer=checkpointer, store=store)
 
     # ------------------------------
     # --- Return Compiled Graphs ---

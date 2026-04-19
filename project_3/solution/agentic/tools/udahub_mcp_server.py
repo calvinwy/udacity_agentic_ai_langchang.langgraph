@@ -142,6 +142,32 @@ def update_ticket_status(ticket_id: str, new_status: str) -> str:
             
     except Exception as e:
         return f"Database error: {str(e)}"
+    
+@mcp.tool()
+def get_user_ticket_history(external_user_id: str, limit: int = 5) -> list:
+    """
+    Retrieves the most recent resolved tickets for a user by external_user_id.
+    Use this to understand if a returning customer has had similar issues before.
+    """
+    query = text("""
+        SELECT
+            t.ticket_id,
+            tm.content AS message,
+            tmd.status,
+            tmd.tags,
+            t.created_at
+        FROM tickets t
+        JOIN users u ON t.user_id = u.user_id
+        JOIN ticket_messages tm ON t.ticket_id = tm.ticket_id
+        JOIN ticket_metadata tmd ON t.ticket_id = tmd.ticket_id
+        WHERE u.external_user_id = :uid
+          AND tmd.status != 'open'
+        ORDER BY t.created_at DESC
+        LIMIT :limit
+    """)
+    with engine.connect() as conn:
+        rows = conn.execute(query, {"uid": external_user_id, "limit": limit}).mappings().all()
+        return [dict(r) for r in rows]
 
 if __name__ == "__main__":
     mcp.run()
