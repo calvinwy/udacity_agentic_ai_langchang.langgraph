@@ -138,3 +138,70 @@ HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 {"timestamp": "2026-04-19T02:34:48.005390", "event": "confidence_score", "ticket_id": "c2f08594-6065-40a9-af28-790c904e69b9", "score": 0.5, "next": "human_escalation"}
 {"timestamp": "2026-04-19T02:34:49.031117", "event": "routing_decision", "ticket_id": "c2f08594-6065-40a9-af28-790c904e69b9", "team": null, "ticket_content_preview": "Hi, I'm trying to understand the pricing structure for your services. It seems a"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:42:34.129760", "event": "routing_decision", "ticket_id": "f7486ad4-54cb-4a58-b71f-cbdfde43cf60", "team": "account_access_team", "ticket_content_preview": "Hi, I noticed an unexpected charge on my latest bill. I believe there might be a"}
+{"timestamp": "2026-04-19T02:42:34.133727", "event": "team_invoked", "team": "account_access_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:42:37.005099", "event": "routing_decision", "ticket_id": "f7486ad4-54cb-4a58-b71f-cbdfde43cf60", "team": null, "ticket_content_preview": "Hi, I noticed an unexpected charge on my latest bill. I believe there might be a"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:42:39.917802", "event": "routing_decision", "ticket_id": "1480424b-55eb-4cbf-aef8-061b062be369", "team": "customer_inquiry_team", "ticket_content_preview": "Hello, I need to cancel my subscription. I've tried doing it through the website"}
+{"timestamp": "2026-04-19T02:42:39.921930", "event": "team_invoked", "team": "customer_inquiry_team", "agent_index": 2}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:42:42.811478", "event": "routing_decision", "ticket_id": "1480424b-55eb-4cbf-aef8-061b062be369", "team": null, "ticket_content_preview": "Hello, I need to cancel my subscription. I've tried doing it through the website"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:42:45.297849", "event": "routing_decision", "ticket_id": "fb135539-9fb8-4931-8030-b95aeb505394", "team": "account_access_team", "ticket_content_preview": "Hi, I'm having trouble accessing my account. Every time I try to log in, it says"}
+{"timestamp": "2026-04-19T02:42:45.300684", "event": "team_invoked", "team": "account_access_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:42:48.372403", "event": "routing_decision", "ticket_id": "fb135539-9fb8-4931-8030-b95aeb505394", "team": null, "ticket_content_preview": "Hi, I'm having trouble accessing my account. Every time I try to log in, it says"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:42:51.216940", "event": "routing_decision", "ticket_id": "052f4dbb-2ae2-4208-9dc7-12bd39ad5a34", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I have a question about the weather forecast for this weekend. I noticed som"}
+{"timestamp": "2026-04-19T02:42:51.222381", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 2}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:42:59.920186", "event": "confidence_score", "ticket_id": "052f4dbb-2ae2-4208-9dc7-12bd39ad5a34", "score": 0.9, "next": "__end__"}
+{"timestamp": "2026-04-19T02:43:00.919512", "event": "routing_decision", "ticket_id": "052f4dbb-2ae2-4208-9dc7-12bd39ad5a34", "team": null, "ticket_content_preview": "Hi, I have a question about the weather forecast for this weekend. I noticed som"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:03.311776", "event": "routing_decision", "ticket_id": "ac608554-4f0a-4db6-9e0f-c2008f431c50", "team": "customer_inquiry_team", "ticket_content_preview": "Hi, I need to cancel my subscription. I've tried doing it through the website, b"}
+{"timestamp": "2026-04-19T02:43:03.318010", "event": "team_invoked", "team": "customer_inquiry_team", "agent_index": 0}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:06.468049", "event": "routing_decision", "ticket_id": "ac608554-4f0a-4db6-9e0f-c2008f431c50", "team": null, "ticket_content_preview": "Hi, I need to cancel my subscription. I've tried doing it through the website, b"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:09.159989", "event": "routing_decision", "ticket_id": "e7f71fe3-cf4e-4455-b034-15f5e531dd63", "team": "account_access_team", "ticket_content_preview": "Hello, I need help with my account password. Every time I try to reset it, the l"}
+{"timestamp": "2026-04-19T02:43:09.165856", "event": "team_invoked", "team": "account_access_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:11.925184", "event": "routing_decision", "ticket_id": "e7f71fe3-cf4e-4455-b034-15f5e531dd63", "team": null, "ticket_content_preview": "Hello, I need help with my account password. Every time I try to reset it, the l"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:14.365895", "event": "routing_decision", "ticket_id": "1523ecab-f2fa-46ce-85d4-458a2d1e7059", "team": "general_inquiry_team", "ticket_content_preview": "Hello, I was trying to book tickets for an event, but the website keeps crashing"}
+{"timestamp": "2026-04-19T02:43:14.370859", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 2}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:24.153478", "event": "confidence_score", "ticket_id": "1523ecab-f2fa-46ce-85d4-458a2d1e7059", "score": 1.0, "next": "__end__"}
+{"timestamp": "2026-04-19T02:43:25.258383", "event": "routing_decision", "ticket_id": "1523ecab-f2fa-46ce-85d4-458a2d1e7059", "team": null, "ticket_content_preview": "Hello, I was trying to book tickets for an event, but the website keeps crashing"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:27.880988", "event": "routing_decision", "ticket_id": "cb2e7547-d2f6-40e3-8101-3fbd96f51b91", "team": "account_access_team", "ticket_content_preview": "Hello, I need help with my account login. Every time I try to log in, it says my"}
+{"timestamp": "2026-04-19T02:43:27.884849", "event": "team_invoked", "team": "account_access_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:31.043648", "event": "routing_decision", "ticket_id": "cb2e7547-d2f6-40e3-8101-3fbd96f51b91", "team": null, "ticket_content_preview": "Hello, I need help with my account login. Every time I try to log in, it says my"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:33.722448", "event": "routing_decision", "ticket_id": "5a67160d-ad9d-47c8-9e9e-7e9a1c6092ad", "team": "general_inquiry_team", "ticket_content_preview": "Hello, I was trying to book a hotel room for my upcoming trip, but the website k"}
+{"timestamp": "2026-04-19T02:43:33.798639", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 2}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:44.480480", "event": "confidence_score", "ticket_id": "5a67160d-ad9d-47c8-9e9e-7e9a1c6092ad", "score": 0.9, "next": "__end__"}
+{"timestamp": "2026-04-19T02:43:45.500789", "event": "routing_decision", "ticket_id": "5a67160d-ad9d-47c8-9e9e-7e9a1c6092ad", "team": null, "ticket_content_preview": "Hello, I was trying to book a hotel room for my upcoming trip, but the website k"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:48.134186", "event": "routing_decision", "ticket_id": "8c732cf6-52ba-41d7-91f4-80cb4031c78a", "team": "account_access_team", "ticket_content_preview": "Hi, I need help with my account password. Every time I try to reset it, the link"}
+{"timestamp": "2026-04-19T02:43:48.137725", "event": "team_invoked", "team": "account_access_team", "agent_index": 1}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:51.240682", "event": "routing_decision", "ticket_id": "8c732cf6-52ba-41d7-91f4-80cb4031c78a", "team": null, "ticket_content_preview": "Hi, I need help with my account password. Every time I try to reset it, the link"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:43:53.788247", "event": "routing_decision", "ticket_id": "214e6f30-a4f5-400c-93a4-3a680e9563f6", "team": "general_inquiry_team", "ticket_content_preview": "Hi, I was trying to book a hotel room for my upcoming trip, but the website keep"}
+{"timestamp": "2026-04-19T02:43:53.793017", "event": "team_invoked", "team": "general_inquiry_team", "agent_index": 2}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+{"timestamp": "2026-04-19T02:44:01.435380", "event": "confidence_score", "ticket_id": "214e6f30-a4f5-400c-93a4-3a680e9563f6", "score": 0.9, "next": "__end__"}
+{"timestamp": "2026-04-19T02:44:02.460996", "event": "routing_decision", "ticket_id": "214e6f30-a4f5-400c-93a4-3a680e9563f6", "team": null, "ticket_content_preview": "Hi, I was trying to book a hotel room for my upcoming trip, but the website keep"}
