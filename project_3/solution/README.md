@@ -2,6 +2,7 @@
 
 This project was built using LangGraph to simulate an Agnetic AI solution for a customer service system.  The architecture of the solution is shown as follow:
 
+Architecture Diagram:
 ![Alt text](./agentic/design/UDA-Hub.png)
 
 There are 3 MCP servers were build for each of the 3 database:
